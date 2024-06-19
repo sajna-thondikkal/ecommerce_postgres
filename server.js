@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 dotenv.config({path:'./config/config.env'});
 
 const app = express();
+const sequelizer = require('./config/dbconfig');
+const Category = require('./models/category');
 
 const PORT = process.env.PORT || 9000;
 

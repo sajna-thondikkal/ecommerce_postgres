@@ -1,24 +1,23 @@
+const {Sequelize} = require('sequelize');
+
 const dbConfig = {
-    user: 'e_commercedb_postgres',
-    password: 'e_commercedb_postgres',
+    user: 'ecommerce_db_postgres',
+    password: 'ecommerce_db_postgres',
     host: 'localhost',
     port: 5432,
-    database: 'e_commercedb_postgres'
+    database : 'ecommerce_db_postgres'
 }
-const Sequelize = require('sequelize');
+
 const sequelize = new Sequelize(dbConfig.database,dbConfig.user,dbConfig.password,{
     host: 'localhost',
-    dialect: 'postgres'
+    dialect: 'postgres',
+    logging: console.log // Enable logging to see SQL queries
 });
 
 sequelize.authenticate().then((result) => {
-    console.log("Connected successfully");
-    sequelize.sync().then((result) => {
-        console.log("--------Model syncd successfully-----------");
-    }).catch((err) => {
-        console.log("-------------Model not synced----------");
-    });
+    console.log("-----Connected successfully------");
 }).catch((err) => {
-    console.log("Connection faild");
+    console.log("-----Not connected------");
 });
+
 module.exports = sequelize;
