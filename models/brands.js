@@ -13,9 +13,9 @@ const Brand = sequelize.define('brand',{
     brandName: DataTypes.STRING
 });
 Brand.sync().then((result) => {
-    console.log("-------synchronized succesfully----------");
+    console.log("-------Brand synchronized succesfully----------");
 }).catch((err) => {
-    console.log("---------Not synchronized--------");
+    console.log("---------Brand Not synchronized--------");
 });
 
 module.exports = Brand;
