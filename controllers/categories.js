@@ -1,14 +1,14 @@
-const Category = require('../models/categories');
+const categoryRepository = require('../repositories/categories');
 
 //@desc get all categories
 //@rout GET/api/v1/categories
 //access public
 async function getAllCategories(req,res){
     try {
-        const categories = await Category.findAll();
-        return res.status(201).json(categories);
+        const categories = await categoryRepository.getAllCategories()
+        res.status(200).json(categories);
     } catch (error) {
-        return res.status(400).json({message:"categories not found"});
+        res.status(404).json({"error message":error});
     }
 }
 
@@ -18,10 +18,10 @@ async function getAllCategories(req,res){
 async function getCategoryById(req,res){
     const id = req.params.id;
     try {
-        const category = await Category.findByPk(id);
-        return res.status(200).json(category);
+        const category = await categoryRepository.getCategoryById(id);
+        res.status(200).json(category);
     } catch (error) {
-        return res.status(400).json({message:"Category not found"});
+        res.status(400).json({message:"Category not found"});
     }
 }
 
@@ -29,15 +29,16 @@ async function getCategoryById(req,res){
 // @rout POST/api/vi/categories
 // access public
 async function createCategory(req,res){
+    const {categoryName} = req.body
     try {
-        const categoryName = req.body;
-        const newCategory = await Category.create(categoryName);
-        return res.status(201).json(newCategory);
+        const newCategory = await categoryRepository.createCategory(categoryName);
+        res.status(201).json(newCategory);
     } catch (error) {
         console.log("Error..",error);
-        return res.status(500).json({error:"Failed to create category"});
+        res.status(500).json({error:"Failed to create category"});
     }
 }
+
 // @desc update category
 // @rout PUT/api/vi/categories/id
 // access public
@@ -45,13 +46,11 @@ async function updateCategory(req,res){
     const id = req.params.id;
     const {categoryName} = req.body;
     try {
-        const category = await Category.findByPk(id);
-        category.categoryName = categoryName;
-        category.save();
-        return res.status(200).json(category);
+        const category = await categoryRepository.updateCategory(id,categoryName);
+        res.status(200).json(category);
     } catch (error) {
         console.log(error);
-        return res.status(400).json({message:"Cannot updated"});
+        res.status(400).json({message:"Cannot updated"});
     }
 }
 
@@ -61,12 +60,11 @@ async function updateCategory(req,res){
 async function deleteCategory(req,res){
     const id = req.params.id;
     try {
-        const category = await Category.findByPk(id);
-        await category.destroy();
-        return res.status(200).json({"message":`successfully deleted ${id}`});
+        const category = categoryRepository.deleteCategory(id)
+        res.status(200).json({"message":`successfully deleted ${id}`});
     } catch (error) {
         console.log(error);
-        return res.status(404).json({"message":"Not deleted"});
+        res.status(404).json({"message":"Not deleted"});
     }    
 }
 
