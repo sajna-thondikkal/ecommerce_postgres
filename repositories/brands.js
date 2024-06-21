@@ -1,39 +1,60 @@
 const Brands = require('../models/brands');
 
 // get all brands
-async function getAllBrands(){
-    const allBrands = await Brands.findAll();
-    return allBrands;
+function getAllBrands(){
+    return new Promise((resolve,reject)=>{
+        Brands.findAll().then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
+
 // get brand by id
-async function getBrandById(id){
-    const brand = await Brands.findByPk(id);
-    return brand;
+function getBrandById(id){
+    return new Promise((resolve,reject)=>{
+        Brands.findByPk(id).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
 
 // create brand
-async function createBrand(brandName){
-    const newBrand = await Brands.create(brandName);
-    return newBrand;
+function createBrand(brandName){
+    return new Promise((resolve,reject)=>{
+        Brands.create(brandName).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
 
 // update brand
-async function updateBrand(id,brandName){
-    const updatedBrand = await Brands.update(
-        {brandName:brandName},
-        {where : {
-            id:id
-        }}
-    );
-    const brand = await Brands.findByPk(id);
-    return brand;
+function updateBrand(id,brandName){
+    return new Promise((resolve,reject)=>{
+        Brands.update({brandName:brandName},{where:{id:id}}).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
 
 // delete brand
-async function deleteBrand(id){
-    const brand = await Brands.findByPk(id);
-    brand.destroy();
+function deleteBrand(id){
+    return new Promise((resolve,reject)=>{
+        Brands.destroy({where:{id:id}}).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
+
 module.exports = {
     createBrand,
     getAllBrands,

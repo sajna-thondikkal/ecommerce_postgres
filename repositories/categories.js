@@ -1,43 +1,60 @@
 const Category = require('../models/categories');
 
 // get all categories
-async function getAllCategories(){
-    const categories = await Category.findAll();
-    return categories;
+
+function getAllCategories(){
+    return new Promise((resolve,reject)=>{
+        Category.findAll().then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
 
 // get category by id
-async function getCategoryById(id){
-    const category = await Category.findByPk(id);
-    return category;
+function getCategoryById(id){
+    return new Promise((resolve,reject)=>{
+        Category.findByPk(id).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
 
 // create category
-async function createCategory(categoryName){
-    const [category,created] = await Category.findOrCreate({
-        where: {categoryName},
-        defaults: {categoryName}
-    });
-    return category;
+function createCategory(categoryName){
+    return new Promise((resolve,reject)=>{
+        Category.create(categoryName).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
+
 }
 
 // update category
-async function updateCategory(id,newCategoryName){
-    const [updatedCategory] = await Category.update(
-        {categoryName:newCategoryName},
-        { where: {
-            id:id
-        }}
-    );
-    const updatedCategoryName = await Category.findByPk(id);
-    return updatedCategoryName;
+function updateCategory(id,newCategoryName){
+    return new Promise((resolve,reject)=>{
+        Category.update({categoryName:newCategoryName},{ where: {id:id}}).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(result);
+        });
+    })
 }
 
 // delete category
-async function deleteCategory(id){
-    const category = await Category.findByPk(id);
-    await category.destroy();
-
+function deleteCategory(id){
+    return new Promise((resolve,reject)=>{
+        Category.destroy({where: {id:id}}).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
 }
 
 module.exports = {
