@@ -3,13 +3,17 @@ const ErrorResponse = require('../utils/errorResponse.js');
 const asyncHandler = require('../middlewares/asyncHandler.js');
 
 
-// get all products
+//@desc get all products
+//@rout GET/products
+//access public
 const getAllProducts = asyncHandler( async (req,res,next)=>{
     const products = await productRepository.getAllProducts();
     res.status(200).json(products);
 })
 
-// get product by id
+//@desc get product by id
+//@rout GET/brands/id
+//access public
 const getProductById = asyncHandler(async (req,res,next)=>{
     const id = req.params.id;
     const product = await productRepository.getProductById(id);
@@ -19,7 +23,9 @@ const getProductById = asyncHandler(async (req,res,next)=>{
     next(new ErrorResponse(`Product does not exist with id ${id}`,404));
 })
 
-// create a product
+//@desc create brand
+//@rout POST/brands
+//access public
 const createProduct = asyncHandler(async (req,res,next)=>{
     const productName= req.body;
     const price = req.body;
@@ -30,7 +36,9 @@ const createProduct = asyncHandler(async (req,res,next)=>{
     }
 })
 
-// update product
+//@desc update brand
+//@rout PUT/brands/id
+//access public
 const updateProduct = asyncHandler(async (req,res,next)=>{
     const id = req.params.id;
     const {productName} = req.body;
@@ -43,7 +51,9 @@ const updateProduct = asyncHandler(async (req,res,next)=>{
     next(new ErrorResponse(`Product does not exist with id ${id}`,404));
 })
 
-// delete product
+//@desc delete brand
+//@rout DELETE/brands/id
+//access public
 const deleteProduct = asyncHandler(async (req,res,next)=>{
     const id = req.params.id;
     const deletedProduct = await productRepository.deleteProduct(id);

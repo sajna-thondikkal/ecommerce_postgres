@@ -3,14 +3,18 @@ const ErrorResponse = require('../utils/errorResponse.js');
 const asyncHandler = require('../middlewares/asyncHandler.js');
 
 
-// find all brands
+//@desc get all brands
+//@rout GET/brands
+//access public
 const getAllBrands = asyncHandler(async (req,res,next)=>{
     const allBrands = await brandRepository.getAllBrands();
     res.status(200).json({"success":true,"data":allBrands});
 })
 
 
-// find brand by id
+//@desc get brand by id
+//@rout GET/brands/id
+//access public
 const getBrandById = asyncHandler(async (req,res,next)=>{
     const id = req.params.id;
     const brand = await brandRepository.getBrandById(id);
@@ -21,7 +25,9 @@ const getBrandById = asyncHandler(async (req,res,next)=>{
 })
 
 
-// create a brand
+//@desc create brand
+//@rout POST/brands
+//access public
 const createBrand = asyncHandler(async (req,res,next)=>{
     const brandName = req.body;
     const newBrand = await brandRepository.createBrand(brandName);
@@ -32,7 +38,9 @@ const createBrand = asyncHandler(async (req,res,next)=>{
 })
 
 
-// update brand
+//@desc update brands
+//@rout PUT/brands/id
+//access public
 const updateBrand = asyncHandler(async(req,res,next)=>{
     const id = req.params.id;
     const {brandName} = req.body;
@@ -45,7 +53,9 @@ const updateBrand = asyncHandler(async(req,res,next)=>{
     next(new ErrorResponse(`Brand does not exist with id ${id}`,404));
 })
 
-// delete brand
+//@desc delete brands
+//@rout DELETE/brands/id
+//access public
 const deleteBrand = asyncHandler(async (req,res,next)=>{
     const id = req.params.id;
     const deletedBrand = await brandRepository.deleteBrand(id);
