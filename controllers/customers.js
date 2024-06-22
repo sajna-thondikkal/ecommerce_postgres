@@ -64,10 +64,21 @@ const deleteCustomer = asyncHandler(async (req,res,next)=>{
     next(new ErrorResponse(`Customer doesnot exist with id ${id}`,404));
 })
 
+// grand total
+const grandTotalOfCustomer = asyncHandler(async (req,res,next)=>{
+    const id = req.params.id;
+    
+    const Gtotal = await customerRepository.grandTotalOfCustomer(id);
+    if(Gtotal){
+        res.status(200).json({"success":true,"Grand total":`Grand total of customer ${id} is ${Gtotal}`});
+    }
+})
+
 module.exports = {
     getAllCustomers,
     getCustomerById,
     createCustomer,
     updateCustomer,
-    deleteCustomer
+    deleteCustomer,
+    grandTotalOfCustomer
 }

@@ -4,7 +4,7 @@ const Brand = require('./brands');
 const Product = require('./products');
 const Customer = require('./customers');
 const Order = require('./orders');
-const Orderlist = require('./orderlist');
+// const Orderlist = require('./orderlist');
 
 //  relationship between category and brands
 // category has many brands
@@ -26,9 +26,9 @@ Order.belongsTo(Customer,{foreignKey:'customer_id'});
 
 // relation between order and ordered list
 // one order has many orderlist
-Order.hasMany(Orderlist,{foreignKey:'order_id'});
+// Order.hasMany(Orderlist,{foreignKey:'order_id'});
 // one orderlist belongs to only one order
-Orderlist.belongsTo(Order,{foreignKey:'order_id'});
+// Orderlist.belongsTo(Order,{foreignKey:'order_id'});
 
 sequelize.sync().then((result) => {
     console.log("-----model Syncronized successfully-----");
@@ -38,5 +38,5 @@ sequelize.sync().then((result) => {
 
 
 module.exports = {
-    Category,Brand,Product,Customer,Order,Orderlist
+    Category,Brand,Product,Customer,Order
 }

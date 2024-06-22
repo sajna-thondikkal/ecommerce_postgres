@@ -11,7 +11,7 @@ const Product = sequelize.define('product',{
         field: "id"
     },
     productName: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    offerPrice:DataTypes.INTEGER
+    price: DataTypes.FLOAT,
+    offerPrice:DataTypes.FLOAT
 })
 module.exports = Product;

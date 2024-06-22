@@ -1,4 +1,6 @@
 const Customer = require('../models/customers');
+const Order = require('../models/orders');
+const { Sequelize, Op } = require('sequelize');
 
 // get all customers
 function getAllCustomers(){
@@ -55,10 +57,32 @@ function deleteCustomer(id){
     })
 }
 
+// find grand total of each customer
+function grandTotalOfCustomer(id){
+    return new Promise((resolve,reject)=>{
+        Customer.findAll({
+            where: { id: id },
+            attributes: [
+                'id', 'name',
+                [Sequelize.fn('SUM', Sequelize.col('orders.total_price')), 'grandTotal']
+            ],
+            include: [{ model: Order, attributes: [] }], 
+            group: ['customer.id', 'customer.name'], 
+            raw: true
+        }).then((result) => {
+            console.log('result from repo cust',result[0].grandTotal);
+            resolve(result[0].grandTotal);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
+}
+
 module.exports = {
     getAllCustomers,
     getCustomerById,
     createCustomer,
     updateCustomer,
-    deleteCustomer
+    deleteCustomer,
+    grandTotalOfCustomer
 }

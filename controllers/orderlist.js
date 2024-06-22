@@ -21,11 +21,10 @@ const getOrderListById = asyncHandler(async(req,res,next)=>{
 
 // create order list
 const createOrderList = asyncHandler(async (req,res,next)=>{
-    const product_name = req.body;
-    const unit_price = req.body;
-    const quantity = req.body;
-    const order_id = req.body;
-    const newlist = await orderlistRepositories.createOrderList(product_name,unit_price,quantity,order_id);
+    const {product_name,unit_price,quantity,order_id} = req.body;
+    const total_price = (quantity * unit_price);
+    console.log("msg from contr",total_price);
+    const newlist = await orderlistRepositories.createOrderList(product_name,unit_price,quantity,total_price,order_id);
     if(newlist){
         res.status(200).json({"message":"successfully created new order list","data":newlist});
     }
@@ -37,9 +36,10 @@ const updateOrderList = asyncHandler(async (req,res,next)=>{
     const {product_name} = req.body;
     const {unit_price} = req.body;
     const {quantity} = req.body;
+    const total_price = (unit_price*quantity);
     const orderlist = await orderlistRepositories.getOrderListById(id);
     if(orderlist){
-        const update = await orderlistRepositories.updateOrderList(id,product_name,unit_price,quantity);
+        const update = await orderlistRepositories.updateOrderList(id,product_name,unit_price,quantity,total_price);
         const updatedList = await orderlistRepositories.getOrderListById(id);
         res.status(200).json({"message":"successfully updated","data":updatedList});
     }

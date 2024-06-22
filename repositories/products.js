@@ -26,7 +26,7 @@ function getProductById(id){
 // create product
 function createProduct(productName,price,offerPrice,brand_id){
     return new Promise((resolve,reject)=>{
-        Product.create(productName,price,offerPrice,brand_id).then((result) => {
+        Product.create({productName,price,offerPrice,brand_id}).then((result) => {
             resolve(result)
         }).catch((err) => {
             reject(err);

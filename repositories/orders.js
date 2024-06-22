@@ -23,11 +23,9 @@ function getOrderById(id){
 }
 
 // create orders
-function createOrder(date,totalAmount,customer_id){
+function createOrder(date,product_name,unit_price,quantity,total_price,customer_id){
     return new Promise((resolve,reject)=>{
-        console.log("msg from repo total amoun",totalAmount);
-        Order.create({date,totalAmount,customer_id}).then((result) => {
-            console.log("msg from repo",result);
+        Order.create({date,product_name,unit_price,quantity,total_price,customer_id}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);
@@ -56,6 +54,7 @@ function deleteOrder(id){
         });
     })
 }
+
 
 module.exports = {
     getAllOrder,

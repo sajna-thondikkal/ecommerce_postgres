@@ -5,7 +5,7 @@ const brandRoutes = require('./routes/brands');
 const productRoutes = require('./routes/products');
 const customerRoutes = require('./routes/customers');
 const orderRoutes = require('./routes/orders');
-const orderlistRoutes = require('./routes/orderlist');
+// const orderlistRoutes = require('./routes/orderlist');
 
 dotenv.config({path:'./config/config.env'});
 
@@ -16,7 +16,6 @@ const Brand = require('./models/relations');
 const Product = require('./models/relations');
 const Customer = require('./models/relations');
 const Order = require('./models/relations');
-const Orderlist = require('./models/relations');
 const errorHandler = require('./middlewares/errorHandler');
 
 const PORT = process.env.PORT || 9000;
@@ -28,7 +27,6 @@ app.use('/brands',brandRoutes);
 app.use('/products',productRoutes);
 app.use('/customers',customerRoutes);
 app.use('/orders',orderRoutes);
-app.use('/orderlists',orderlistRoutes);
 app.use(errorHandler);
 
 app.listen(PORT,()=>{

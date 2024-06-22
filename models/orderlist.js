@@ -12,7 +12,8 @@ const Orderlist = sequelize.define('orderlist',{
     },
     product_name: DataTypes.STRING,
     unit_price : DataTypes.FLOAT,
-    quantity : DataTypes.INTEGER
+    quantity : DataTypes.INTEGER,
+    total_price : DataTypes.FLOAT
 });
 // Orderlist.sync().then((result) => {
 //     console.log("---Model orderlist synchronised-----");
@@ -20,4 +21,4 @@ const Orderlist = sequelize.define('orderlist',{
 //     console.log("-----Orderlist not syncd----");
 // });
 
-module.exports = Orderlist;
+// module.exports = Orderlist;

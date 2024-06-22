@@ -17,4 +17,8 @@ router.put('/:id',customerControllers.updateCustomer);
 // delet customer
 router.delete('/:id',customerControllers.deleteCustomer);
 
+// get grand total of customers
+router.get('/grandtotal/:id',customerControllers.grandTotalOfCustomer);
+
+
 module.exports = router;
