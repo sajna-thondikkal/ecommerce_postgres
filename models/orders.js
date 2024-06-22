@@ -10,13 +10,12 @@ const Order = sequelize.define('order',{
         unique:true,
         field: "id"
     },
-    customer_id: DataTypes.STRING,
     date: DataTypes.DATE,
-    totalAmount : DataTypes.FLOAT
+    totalAmount : DataTypes.INTEGER
 })
-Order.sync().then((result) => {
-    console.log("-------Order model synchronized------");
-}).catch((err) => {
-    console.log("---------Order model not synchronised-----",err);
-});
+// Order.sync().then((result) => {
+//     console.log("-------Order model synchronized------");
+// }).catch((err) => {
+//     console.log("---------Order model not synchronised-----",err);
+// });
 module.exports = Order;

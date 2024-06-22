@@ -11,15 +11,12 @@ const Customer = sequelize.define('customer',{
         field:"id",
     },
     name: DataTypes.STRING,
-    phone:DataTypes.INTEGER,
-    email : DataTypes.STRING,
-    city : DataTypes.STRING,
-    state: DataTypes.STRING
+    phone:DataTypes.INTEGER
 });
 
-Customer.sync().then((result) => {
-    console.log("-------customer synchronized succesfully----------");
-}).catch((err) => {
-    console.log("---------customer Not synchronized--------");
-});
+// Customer.sync().then((result) => {
+//     console.log("-------customer synchronized succesfully----------");
+// }).catch((err) => {
+//     console.log("---------customer Not synchronized--------");
+// });
 module.exports = Customer;

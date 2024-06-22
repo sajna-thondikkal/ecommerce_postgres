@@ -30,10 +30,7 @@ const getCustomerById = asyncHandler(async(req,res,next)=>{
 const createCustomer = asyncHandler(async(req,res,next)=>{
     const name = req.body;
     const phone = req.body;
-    const email = req.body;
-    const city = req.body;
-    const state = req.body
-    const customer = await customerRepository.createCustomer(name,phone,email,city,state);
+    const customer = await customerRepository.createCustomer(name,phone);
     if(customer){
         res.status(200).json({"success":true,"data":customer});
     }

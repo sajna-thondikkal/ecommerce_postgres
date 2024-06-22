@@ -14,10 +14,10 @@ const Orderlist = sequelize.define('orderlist',{
     unit_price : DataTypes.FLOAT,
     quantity : DataTypes.INTEGER
 });
-Orderlist.sync().then((result) => {
-    console.log("---Model orderlist synchronised-----");
-}).catch((err) => {
-    console.log("-----Orderlist not syncd----");
-});
+// Orderlist.sync().then((result) => {
+//     console.log("---Model orderlist synchronised-----");
+// }).catch((err) => {
+//     console.log("-----Orderlist not syncd----");
+// });
 
 module.exports = Orderlist;

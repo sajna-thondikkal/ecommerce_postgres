@@ -23,9 +23,9 @@ function getOrderListById(id){
 }
 
 // create order list
-function createOrderList(product_name,unit_price,quantity){
+function createOrderList(product_name,unit_price,quantity,order_id){
     return new Promise((resolve,reject)=>{
-        Orderlist.create(product_name,unit_price,quantity).then((result) => {
+        Orderlist.create(product_name,unit_price,quantity,order_id).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

@@ -21,10 +21,9 @@ const getOrderById = asyncHandler(async (req,res,next)=>{
 
 // create order
 const createOrder = asyncHandler(async (req,res,next)=>{
-    const customer_id = req.body;
-    const date = req.body;
-    const totalAmount = req.body;
-    const create = await orderRpository.createOrder(customer_id,date,totalAmount);
+    const date = new Date();
+    const {totalAmount,customer_id} = req.body;
+    const create = await orderRpository.createOrder(date,totalAmount,customer_id);
     if(create){
         res.status(200).json({"success":true,"data":create});
     }
@@ -34,11 +33,10 @@ const createOrder = asyncHandler(async (req,res,next)=>{
 // update orders
 const updateOrder = asyncHandler(async(req,res,next)=>{
     const id = req.params.id;
-    const {customer_id }= req.body;
     const {totalAmount} = req.body;
     const exist = await orderRpository.getOrderById(id);
     if(exist){
-        const update = await orderRpository.updateOrder(id,customer_id,totalAmount);
+        const update = await orderRpository.updateOrder(id,totalAmount);
         const updatedOrder = await orderRpository.getOrderById(id);
         res.status(200).json({"success":true,"data":updatedOrder});
     }

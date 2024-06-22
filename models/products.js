@@ -14,10 +14,4 @@ const Product = sequelize.define('product',{
     price: DataTypes.INTEGER,
     offerPrice:DataTypes.INTEGER
 })
-Product.sync().then((result) => {
-    console.log("---Product Model synchronised successfully---");
-}).catch((err) => {
-    console.log("----Product model not synchronized---");
-});
-
 module.exports = Product;

@@ -24,9 +24,9 @@ function getProductById(id){
 }
 
 // create product
-function createProduct(productName,price,offerPrice){
+function createProduct(productName,price,offerPrice,brand_id){
     return new Promise((resolve,reject)=>{
-        Product.create(productName,price,offerPrice).then((result) => {
+        Product.create(productName,price,offerPrice,brand_id).then((result) => {
             resolve(result)
         }).catch((err) => {
             reject(err);
@@ -35,9 +35,9 @@ function createProduct(productName,price,offerPrice){
 }
 
 // update product
-function updateProduct(id,productName){
+function updateProduct(id,productName,price,offerPrice,brand_id){
     return new Promise((resolve,reject)=>{
-        Product.update({productName: productName},{where : {id:id}}).then((result) => {
+        Product.update({productName: productName,price:price,offerPrice:offerPrice,brand_id:brand_id},{where : {id:id}}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

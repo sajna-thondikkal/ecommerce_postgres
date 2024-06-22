@@ -29,8 +29,9 @@ const getBrandById = asyncHandler(async (req,res,next)=>{
 //@rout POST/brands
 //access public
 const createBrand = asyncHandler(async (req,res,next)=>{
-    const brandName = req.body;
-    const newBrand = await brandRepository.createBrand(brandName);
+    const {brandName,category_id} = req.body;
+    console.log("message from contro",brandName,category_id);
+    const newBrand = await brandRepository.createBrand(brandName,category_id);
     if(newBrand){
         res.status(200).json({"success":true,"data":newBrand});
     }
@@ -43,10 +44,10 @@ const createBrand = asyncHandler(async (req,res,next)=>{
 //access public
 const updateBrand = asyncHandler(async(req,res,next)=>{
     const id = req.params.id;
-    const {brandName} = req.body;
+    const {brandName,category_id} = req.body;
     const brand = await brandRepository.getBrandById(id);
     if(brand){
-        const updateBrand = await brandRepository.updateBrand(id,brandName);
+        const updateBrand = await brandRepository.updateBrand(id,brandName,category_id);
         const updatedBrand = await brandRepository.getBrandById(id);
         res.status(200).json({"success":true,"data":updatedBrand});
     }

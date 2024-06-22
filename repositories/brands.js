@@ -23,9 +23,10 @@ function getBrandById(id){
 }
 
 // create brand
-function createBrand(brandName){
+function createBrand(brandName,category_id){
     return new Promise((resolve,reject)=>{
-        Brands.create(brandName).then((result) => {
+        console.log("msg from repo",brandName,category_id);
+        Brands.create({brandName,category_id}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);
@@ -34,9 +35,9 @@ function createBrand(brandName){
 }
 
 // update brand
-function updateBrand(id,brandName){
+function updateBrand(id,brandName,category_id){
     return new Promise((resolve,reject)=>{
-        Brands.update({brandName:brandName},{where:{id:id}}).then((result) => {
+        Brands.update({brandName:brandName,category_id:category_id},{where:{id:id}}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

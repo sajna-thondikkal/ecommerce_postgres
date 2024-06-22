@@ -23,35 +23,36 @@ const getProductById = asyncHandler(async (req,res,next)=>{
     next(new ErrorResponse(`Product does not exist with id ${id}`,404));
 })
 
-//@desc create brand
+//@desc create product
 //@rout POST/brands
 //access public
 const createProduct = asyncHandler(async (req,res,next)=>{
     const productName= req.body;
     const price = req.body;
     const offerPrice = req.body;
-    const newProduct = await productRepository.createProduct(productName,price,offerPrice);
+    const brand_id = req.body;
+    const newProduct = await productRepository.createProduct(productName,price,offerPrice,brand_id);
     if(newProduct){
         res.status(200).json({"success":true,"data":newProduct});
     }
 })
 
-//@desc update brand
+//@desc update product
 //@rout PUT/brands/id
 //access public
 const updateProduct = asyncHandler(async (req,res,next)=>{
     const id = req.params.id;
-    const {productName} = req.body;
+    const {productName,price,offerPrice,brand_id} = req.body;
     const product = await productRepository.getProductById(id);
     if(product){
-        const updateproduct = await productRepository.updateProduct(id,productName);
+        const updateproduct = await productRepository.updateProduct(id,productName,price,offerPrice,brand_id);
         const updatedProduct = await productRepository.getProductById(id);
         res.status(200).json({"success":true,"data":updatedProduct});
     }
     next(new ErrorResponse(`Product does not exist with id ${id}`,404));
 })
 
-//@desc delete brand
+//@desc delete product
 //@rout DELETE/brands/id
 //access public
 const deleteProduct = asyncHandler(async (req,res,next)=>{

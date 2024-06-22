@@ -23,9 +23,9 @@ function getCustomerById(id){
 }
 
 // create customers
-function createCustomer(name,phone,email,city,state){
+function createCustomer(name,phone){
     return new Promise((resolve,reject)=>{
-        Customer.create(name,phone,email,city,state).then((result) => {
+        Customer.create(name,phone).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

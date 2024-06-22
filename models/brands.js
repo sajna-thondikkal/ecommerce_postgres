@@ -10,12 +10,14 @@ const Brand = sequelize.define('brand',{
         unique:true,
         field:"id",
     },
-    brandName: DataTypes.STRING
-});
-Brand.sync().then((result) => {
-    console.log("-------Brand synchronized succesfully----------");
-}).catch((err) => {
-    console.log("---------Brand Not synchronized--------");
+    brandName: DataTypes.STRING,
+    // categoryId: {
+    //     type:DataTypes.INTEGER,
+    //     references: {
+    //         model: 'categories',
+    //         key: 'id'
+    //     }
+    // }
 });
 
 module.exports = Brand;

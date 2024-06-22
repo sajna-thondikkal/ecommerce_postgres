@@ -13,10 +13,4 @@ const Category = sequelize.define('category',{
     categoryName: DataTypes.STRING,
 });
 
-Category.sync().then((result) => {
-    console.log("-----Category model Syncronized successfully-----");
-}).catch((err) => {
-    console.log("--- Category Not synchronized-------");
-});
-
 module.exports = Category;

@@ -24,7 +24,8 @@ const createOrderList = asyncHandler(async (req,res,next)=>{
     const product_name = req.body;
     const unit_price = req.body;
     const quantity = req.body;
-    const newlist = await orderlistRepositories.createOrderList(product_name,unit_price,quantity);
+    const order_id = req.body;
+    const newlist = await orderlistRepositories.createOrderList(product_name,unit_price,quantity,order_id);
     if(newlist){
         res.status(200).json({"message":"successfully created new order list","data":newlist});
     }

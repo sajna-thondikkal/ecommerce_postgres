@@ -23,9 +23,11 @@ function getOrderById(id){
 }
 
 // create orders
-function createOrder(customer_id,totalAmount){
+function createOrder(date,totalAmount,customer_id){
     return new Promise((resolve,reject)=>{
-        Order.create(customer_id,totalAmount).then((result) => {
+        console.log("msg from repo total amoun",totalAmount);
+        Order.create({date,totalAmount,customer_id}).then((result) => {
+            console.log("msg from repo",result);
             resolve(result);
         }).catch((err) => {
             reject(err);
@@ -34,9 +36,9 @@ function createOrder(customer_id,totalAmount){
 }
 
 // update orders
-function updateOrder(id,customer_id,totalAmount){
+function updateOrder(id,totalAmount){
     return new Promise((resolve,reject)=>{
-        Order.update({customer_id,totalAmount},{where: {id:id}}).then((result) => {
+        Order.update({totalAmount},{where: {id:id}}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

@@ -11,12 +11,12 @@ dotenv.config({path:'./config/config.env'});
 
 const app = express();
 const sequelizer = require('./config/dbconfig');
-const Category = require('./models/categories');
-const Brand = require('./models/brands');
-const Product = require('./models/products');
-const Customer = require('./models/customers');
-const Order = require('./models/orders');
-const Orderlist = require('./models/orderlist');
+const Category = require('./models/relations');
+const Brand = require('./models/relations');
+const Product = require('./models/relations');
+const Customer = require('./models/relations');
+const Order = require('./models/relations');
+const Orderlist = require('./models/relations');
 const errorHandler = require('./middlewares/errorHandler');
 
 const PORT = process.env.PORT || 9000;
