@@ -5,3 +5,12 @@ Brand
 Product
 Customer
 Orders
+
+
+
+
+        for(let userRole of userRoles){
+            if(roles.includes(userRole.name))
+                hasRole = true;
+                break;
+        }

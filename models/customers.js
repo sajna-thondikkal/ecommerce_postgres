@@ -19,4 +19,4 @@ const Customer = sequelize.define('customer',{
 // }).catch((err) => {
 //     console.log("---------customer Not synchronized--------");
 // });
-module.exports = Customer;
+// module.exports = Customer;

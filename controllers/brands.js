@@ -47,7 +47,7 @@ const updateBrand = asyncHandler(async(req,res,next)=>{
     const {brandName,category_id} = req.body;
     const brand = await brandRepository.getBrandById(id);
     if(brand){
-        const updateBrand = await brandRepository.updateBrand(id,brandName,category_id);
+        const updateBrand = await brandRepository.updateBrand(id,brandName,cat);
         const updatedBrand = await brandRepository.getBrandById(id);
         res.status(200).json({"success":true,"data":updatedBrand});
     }
