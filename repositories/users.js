@@ -1,6 +1,10 @@
 const { where } = require('sequelize');
 const User = require('../models/users');
+const Order = require('../models/orders');
+
 const Role = require('../models/roles.js');
+const { Sequelize, Op } = require('sequelize');
+
 
 // get all users
 function getAllUsers(){

@@ -21,7 +21,7 @@ router.delete('/:id',userControllers.deleteUser);
 router.get('/role/:id',userControllers.getUserRoleByUserId);
 
 // get grand total of each user after purchase.
-router.get('/grandtotal/:id');
+router.get('/grandtotal/:id',userControllers.grandTotalOfCustomer);
 
 
 module.exports = router;

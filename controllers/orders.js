@@ -22,9 +22,10 @@ const getOrderById = asyncHandler(async (req,res,next)=>{
 // create order
 const createOrder = asyncHandler(async (req,res,next)=>{
     const date = new Date();
-    const {product_name,unit_price,quantity,customer_id} = req.body;
+    const {product_name,unit_price,quantity,user_id} = req.body;
+    console.log("msg from cntrlr",unit_price,quantity);
     const total_price = (quantity * unit_price);
-    const create = await orderRpository.createOrder(date,product_name,unit_price,quantity,total_price,customer_id);
+    const create = await orderRpository.createOrder(date,product_name,unit_price,quantity,total_price,user_id);
     if(create){
         res.status(200).json({"success":true,"data":create});
     }

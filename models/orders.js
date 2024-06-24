@@ -12,9 +12,9 @@ const Order = sequelize.define('order',{
     },
     date: DataTypes.DATE,
     product_name: DataTypes.STRING,
-    unit_price : DataTypes.FLOAT,
+    unit_price : DataTypes.INTEGER,
     quantity : DataTypes.INTEGER,
-    total_price : DataTypes.FLOAT
+    total_price : DataTypes.INTEGER
 })
 // Order.sync().then((result) => {
 //     console.log("-------Order model synchronized------");

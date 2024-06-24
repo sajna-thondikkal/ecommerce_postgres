@@ -2,7 +2,6 @@ const sequelize = require('../config/dbconfig');
 const Category = require('./categories');
 const Brand = require('./brands');
 const Product = require('./products');
-const Customer = require('./customers');
 const Order = require('./orders');
 const Role = require('./roles');
 const User = require('./users');
@@ -40,5 +39,5 @@ sequelize.sync().then((result) => {
 
 
 module.exports = {
-    Category,Brand,Product,Customer,Order,User,Role
+    Category,Brand,Product,Order,User,Role
 }

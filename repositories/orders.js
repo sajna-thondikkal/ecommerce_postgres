@@ -23,9 +23,9 @@ function getOrderById(id){
 }
 
 // create orders
-function createOrder(date,product_name,unit_price,quantity,total_price,customer_id){
+function createOrder(date,product_name,unit_price,quantity,total_price,user_id){
     return new Promise((resolve,reject)=>{
-        Order.create({date,product_name,unit_price,quantity,total_price,customer_id}).then((result) => {
+        Order.create({date,product_name,unit_price,quantity,total_price,user_id}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);
