@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const userControllers = require('../controllers/users');
+const { verifyTokenHandler} = require('../middlewares/jwtHandler.js');
+const {verifyRoles} = require('../middlewares/verifyRoles.js');
+
 
 // get all users
 router.get('/',userControllers.getAllUsers);
@@ -15,7 +18,7 @@ router.post('/signup',userControllers.createUser);
 router.post('/login',userControllers.loginUser);
 
 // delete user
-router.delete('/:id',userControllers.deleteUser);
+router.delete('/:id',[verifyTokenHandler,verifyRoles(['admin'])],userControllers.deleteUser);
 
 // get user role
 router.get('/role/:id',userControllers.getUserRoleByUserId);

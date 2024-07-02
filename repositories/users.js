@@ -58,11 +58,9 @@ function getUserRoleByUserId(user_id){
 }
 
 // create user
-function createUser(user_name,password,phone,role_id){
+function createUser(user_name,password,place,phone,role_id){
     return new Promise((resolve,reject)=>{
-        console.log("msg fro repo ro",role_id);
-        User.create({user_name,password,phone,role_id}).then((result) => {
-            console.log("msg fro repo",result);
+        User.create({user_name,password,place,phone,role_id}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);
@@ -94,7 +92,6 @@ function grandTotalOfCustomer(user_id){
             group: ['user.user_id', 'user.user_name'], 
             raw: true
         }).then((result) => {
-            console.log('result from repo cust',result[0].grandTotal);
             resolve(result[0].grandTotal);
         }).catch((err) => {
             reject(err);

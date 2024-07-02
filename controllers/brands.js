@@ -30,7 +30,6 @@ const getBrandById = asyncHandler(async (req,res,next)=>{
 //access public
 const createBrand = asyncHandler(async (req,res,next)=>{
     const {brandName,category_id} = req.body;
-    console.log("message from contro",brandName,category_id);
     const newBrand = await brandRepository.createBrand(brandName,category_id);
     if(newBrand){
         res.status(200).json({"success":true,"data":newBrand});
@@ -47,7 +46,7 @@ const updateBrand = asyncHandler(async(req,res,next)=>{
     const {brandName,category_id} = req.body;
     const brand = await brandRepository.getBrandById(id);
     if(brand){
-        const updateBrand = await brandRepository.updateBrand(id,brandName,cat);
+        const updateBrand = await brandRepository.updateBrand(id,brandName);
         const updatedBrand = await brandRepository.getBrandById(id);
         res.status(200).json({"success":true,"data":updatedBrand});
     }

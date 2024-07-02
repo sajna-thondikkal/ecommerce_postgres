@@ -16,7 +16,6 @@ function getProductById(id){
     return new Promise((resolve,reject)=>{
         Product.findByPk(id).then((result) => {
             resolve(result);
-            console.log("result from repo",result);
         }).catch((err) => {
             reject(err);
         });
@@ -24,9 +23,9 @@ function getProductById(id){
 }
 
 // create product
-function createProduct(productName,price,offerPrice,brand_id){
+function createProduct(productName,price,offerPrice,category_id,brand_id){
     return new Promise((resolve,reject)=>{
-        Product.create({productName,price,offerPrice,brand_id}).then((result) => {
+        Product.create({productName,price,offerPrice,category_id,brand_id}).then((result) => {
             resolve(result)
         }).catch((err) => {
             reject(err);
@@ -35,9 +34,9 @@ function createProduct(productName,price,offerPrice,brand_id){
 }
 
 // update product
-function updateProduct(id,productName,price,offerPrice,brand_id){
+function updateProduct(id,productName,price,offerPrice,category_id,brand_id){
     return new Promise((resolve,reject)=>{
-        Product.update({productName: productName,price:price,offerPrice:offerPrice,brand_id:brand_id},{where : {id:id}}).then((result) => {
+        Product.update({productName: productName,price:price,offerPrice:offerPrice,category_id:category_id,brand_id:brand_id},{where : {id:id}}).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

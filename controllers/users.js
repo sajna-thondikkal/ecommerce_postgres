@@ -24,16 +24,13 @@ const getUserByUserId = asyncHandler(async (req,res,next)=>{
 // create user
 // sign up
 const createUser = asyncHandler(async (req,res,next)=>{
-    const {user_name,password,phone,role_id} = req.body;
+    const {user_name,password,place,phone,role_id} = req.body;
     const hashedpassword = hashPassword(password);
-    console.log("msg fro cntro roleid",role_id);
-
     const userExist = await userRepository.getUserByUserName(user_name);
     if(userExist){
         return(next(new ErrorResponse("User Already exist",400))) ;
     }
-    const newUser = await userRepository.createUser(user_name,hashedpassword,phone,role_id);
-    console.log("msg from controllers",newUser);
+    const newUser = await userRepository.createUser(user_name,hashedpassword,place,phone,role_id);
     const token = createjwt(newUser);
     if(newUser){
         res.status(200).json({"message":"successfully created new user",user_name:user_name,token:token});
@@ -69,7 +66,6 @@ const deleteUser = asyncHandler(async (req,res,next)=>{
 const getUserRoleByUserId = asyncHandler(async (req,res,next)=>{
     const user_id = req.params.id;
     const role = await userRepository.getUserRoleByUserId(user_id);
-    console.log("msg from contrl role",role);
     if(role){
     res.status(200).json({"message":`user role is ${role}`});
     }

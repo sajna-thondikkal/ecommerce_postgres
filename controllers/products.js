@@ -1,7 +1,8 @@
 const productRepository = require('../repositories/products');
 const ErrorResponse = require('../utils/errorResponse.js');
 const asyncHandler = require('../middlewares/asyncHandler.js');
-const findOfferPrice = require('../services/offerprice.js');
+const productServices = require('../services/products.js')
+// const findOfferPrice = require('../services/offerprice.js');
 
 
 //@desc get all products
@@ -28,9 +29,10 @@ const getProductById = asyncHandler(async (req,res,next)=>{
 //@rout POST/brands
 //access public
 const createProduct = asyncHandler(async (req,res,next)=>{
-    const {productName,price,brand_id}= req.body;
-    const offerPrice = findOfferPrice(price);
-    const newProduct = await productRepository.createProduct(productName,price,offerPrice,brand_id);
+    const {productName,price,category_id,brand_id}= req.body;
+    const offerPrice = productServices.findOfferPrice(price)
+    // const offerPrice = findOfferPrice(price);
+    const newProduct = await productRepository.createProduct(productName,price,offerPrice,category_id,brand_id);
     if(newProduct){
         res.status(200).json({"success":true,"data":newProduct});
     }
@@ -41,10 +43,11 @@ const createProduct = asyncHandler(async (req,res,next)=>{
 //access public
 const updateProduct = asyncHandler(async (req,res,next)=>{
     const id = req.params.id;
-    const {productName,price,offerPrice,brand_id} = req.body;
+    const {productName,price,category_id,brand_id} = req.body;
+    offerPrice = findOfferPrice(price);
     const product = await productRepository.getProductById(id);
     if(product){
-        const updateproduct = await productRepository.updateProduct(id,productName,price,offerPrice,brand_id);
+        const updateproduct = await productRepository.updateProduct(id,productName,price,offerPrice,category_id,brand_id);
         const updatedProduct = await productRepository.getProductById(id);
         res.status(200).json({"success":true,"data":updatedProduct});
     }

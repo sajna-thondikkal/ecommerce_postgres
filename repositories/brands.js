@@ -25,7 +25,6 @@ function getBrandById(id){
 // create brand
 function createBrand(brandName,category_id){
     return new Promise((resolve,reject)=>{
-        console.log("msg from repo",brandName,category_id);
         Brands.create({brandName,category_id}).then((result) => {
             resolve(result);
         }).catch((err) => {

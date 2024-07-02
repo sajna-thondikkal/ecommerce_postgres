@@ -1,8 +1,10 @@
 const sequelize = require('../config/dbconfig');
-const { DataTypes,Sequelize} = require('sequelize');
+const {DataTypes} = require('sequelize');
+const User = require('./users');
+
 
 const Order = sequelize.define('order',{
-    id:{
+    order_id:{
         type:DataTypes.INTEGER,
         primaryKey:true,
         autoIncrement:true,
@@ -10,15 +12,29 @@ const Order = sequelize.define('order',{
         unique:true,
         field: "id"
     },
+    user_id: DataTypes.INTEGER,
     date: DataTypes.DATE,
-    product_name: DataTypes.STRING,
-    unit_price : DataTypes.INTEGER,
-    quantity : DataTypes.INTEGER,
-    total_price : DataTypes.INTEGER
+    grand_total:DataTypes.INTEGER
 })
-// Order.sync().then((result) => {
-//     console.log("-------Order model synchronized------");
-// }).catch((err) => {
-//     console.log("---------Order model not synchronised-----",err);
-// });
-module.exports = Order;
+const OrderLineItems = sequelize.define('orderlineitems',{
+    order_line_id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:true,
+        allowNull:false,
+        unique:true,
+        field: "id"
+    },
+    product_name:DataTypes.STRING,
+    unit_price:DataTypes.INTEGER,
+    quantity:DataTypes.INTEGER,
+    item_price:DataTypes.INTEGER
+})
+
+OrderLineItems.belongsTo(Order,{foreignKey:'order_id'});
+Order.hasMany(OrderLineItems,{foreignKey:'order_id'});
+Order.belongsTo(User,{foreignKey:'user_id'});
+
+
+module.exports = {Order,OrderLineItems};
+

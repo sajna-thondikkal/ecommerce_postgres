@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const roleControllers = require('../controllers/roles');
+const { verifyTokenHandler} = require('../middlewares/jwtHandler.js');
+const {verifyRoles} = require('../middlewares/verifyRoles.js');
+
 
 // get all user role
 router.get('/',roleControllers.getAllUserRole),
@@ -9,12 +12,12 @@ router.get('/',roleControllers.getAllUserRole),
 router.get('/:id',roleControllers.getUserRoleById);
 
 // create user role
-router.post('/',roleControllers.createUserRole);
+router.post('/',[verifyTokenHandler,verifyRoles(['admin'])],roleControllers.createUserRole);
 
 // update user role
-router.put('/:id',roleControllers.updateUserRole);
+router.put('/:id',[verifyTokenHandler,verifyRoles(['admin'])],roleControllers.updateUserRole);
 
 // delete user role
-router.delete('/:id',roleControllers.deleteUserRole);
+router.delete('/:id',[verifyTokenHandler,verifyRoles(['admin'])],roleControllers.deleteUserRole);
 
 module.exports = router

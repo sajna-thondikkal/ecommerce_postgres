@@ -1,5 +1,6 @@
 const sequelize = require('../config/dbconfig');
-const {Sequelize,DataTypes} = require('sequelize');
+const {DataTypes} = require('sequelize');
+const Role = require('./roles');
 
 const User = sequelize.define('user',{
     user_id:{
@@ -8,11 +9,14 @@ const User = sequelize.define('user',{
         primaryKey:true,
         autoIncrement:true,
         unique:true,
-        field:"user_id",
+        field:"id",
     },
     user_name:DataTypes.STRING,
-    phone:DataTypes.INTEGER,
     password:DataTypes.STRING,
+    place:DataTypes.STRING,
+    phone:DataTypes.INTEGER,
 });
+// User.hasMany(Order,{foreignKey:'user_id'});
+User.belongsTo(Role,{foreignKey:'role_id'});
 
 module.exports = User;
